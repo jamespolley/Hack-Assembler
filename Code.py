@@ -11,19 +11,19 @@ class Code:
     @staticmethod
     def _binary(num):
         """
-        Convert integer string into binary string.
+        Return string (of integer) converted into a binary string.
         """
         return bin(int(num))[2:]
     
     def a_instruction(self, address):
         """
-        Convert assembly language A-instruction string into binary string.
+        Return A-instruction string converted into a binary string.
         """
         return '0' + self._binary(address).zfill(15)
 
     def c_instruction(self, dest, comp, jump):
         """
-        Convert assembly language C-instruction string into binary string.
+        Return C-instruction string converted into a binary string.
         """
         dest_code = str(self._binary(self.dest_codes.index(dest)).zfill(3))
         comp_code = self.comp_codes[comp]

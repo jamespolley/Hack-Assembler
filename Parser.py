@@ -1,9 +1,10 @@
 import re
 from Code import Code
 
+
 class Parser():
     """
-    Class responsible for formatting, identifying symbol type, and handling conversion of instructions.
+    Class responsible for formatting, identifying symbol types, and handling conversion of instructions.
     """
 
     # Types of Instructions
@@ -21,10 +22,10 @@ class Parser():
     # Parts of C-Instruction & C-Instruction (Computation) Regular Expressions
     RE_DEST = r"(?:(M|D|MD|A|AM|AD|AMD)=)?"
     RE_COMP = (
-        r"(0|1|-1|D|A|!D|!A|-D|-A|D\+1|A\+1|D-1|A-1|D\+A|D-A|A-D|D&A|D\|A|"
-        r"M|!M|-M|M\+1|M-1|D\+M|D-M|M-D|D&M|D\|M)")
+        r"(0|1|-1|D|A|!D|!A|-D|-A|D\+1|A\+1|D-1|A-1|D\+A|D-A|A-D|D&A|D\|A|M|!M|-M|M\+1|M-1|D\+M|D-M|M-D|D&M|D\|M)")
     RE_JUMP = r"(?:;(JGT|JEQ|JGE|JLT|JNE|JLE|JMP))?"
-    RE_C_INSTRUCTION = re.compile(r"^%s%s%s$" % (RE_DEST, RE_COMP, RE_JUMP))
+    RE_C_INSTRUCTION = re.compile(
+        r"^%s%s%s$" % (RE_DEST, RE_COMP, RE_JUMP))
 
     # L-Instruction (Label) Regular Expression
     RE_L_INSTRUCTION = re.compile(r"^\(" + RE_SYMBOL + r"\)$")
@@ -34,7 +35,7 @@ class Parser():
 
     def format_line(self, line):
         """
-        Remove whitespace and comments from line.
+        Return formatted line with whitespace and comments removed.
         """
         formatted_line = re.sub(self.RE_FORMAT, '', line)
         if len(formatted_line) > 0:
@@ -43,7 +44,7 @@ class Parser():
     
     def instruction_type(self, instruction):
         """
-        Identify instruction type, and return corresponding integer constant.
+        Return instruction type as its corresponding integer constant.
         """
         if re.match(self.RE_A_INSTRUCTION, instruction):
             return self.A_INSTRUCTION
@@ -55,13 +56,13 @@ class Parser():
 
     def a_instruction(self, address):
         """
-        Convert assembly A-instruction to binary.
+        Return A-instruction converted to binary.
         """
         return self.code.a_instruction(address)
 
     def c_instruction(self, instruction):
         """
-        Convert assembly C-instruction to binary.
+        Return C-instruction converted to binary.
         """
         dest = self._get_dest(instruction)
         comp = self._get_comp(instruction)
@@ -84,7 +85,7 @@ class Parser():
     
     def _get_jump(self, instruction):
         """
-        Return 'jump' part of C-instruction, or a empty string if missing.
+        Return 'jump' part of C-instruction, or an empty string if missing.
         """
         if ';' in instruction:
             return instruction.split(';')[1]

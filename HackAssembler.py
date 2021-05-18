@@ -2,9 +2,10 @@ import sys
 from SymbolTable import SymbolTable
 from Parser import Parser
 
+
 class HackAssembler:
     """
-    Main class of Hack Assembler. Drives assembly process. Handles reading of assembly file and writing of hack file.
+    Main class of Hack Assembler. Drives the assembly process. Handles reading of the assembly file and writing of the hack file.
     """
 
     def __init__(self):
@@ -80,13 +81,13 @@ def main():
     """
     if len(sys.argv) !=2:
         print(
-            'Error in usage. Please enter a command in the following format:\
-            \n    python HackAssembler.py [AssemblerFile.asm]')
+            'Error in usage. Please enter a command in the following format:\n    python HackAssembler.py [AssemblerFile.asm]')
         return
 
     asm_file = sys.argv[1]
     if not asm_file.endswith(".asm"):
-        print('Error with file type. File must end with ".asm"')
+        # print('Error with file type. File must end with ".asm"')
+        # return Exception('Invalid file type. Must end with ".asm"')
         return
     
     hack_assembler = HackAssembler()
@@ -95,6 +96,7 @@ def main():
         hack_assembler.assemble(asm_file)
     except:
         print("Invalid input")
+        # Exception('Invalid input')
         pass
     
 if __name__ == '__main__':

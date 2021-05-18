@@ -46,7 +46,7 @@ class SymbolTable(dict):
     
     def get_address(self, symbol):
         """
-        Return address of symbol, or -1 if symbol not found in SymbolTable.
+        Return address of symbol (label or variable), or -1 if symbol not found in SymbolTable.
         """
         if symbol in self:
             return self[symbol]
